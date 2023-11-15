@@ -1,8 +1,30 @@
 import 'controllers/bank_controller.dart';
 import 'exceptions/bank_controller_exceptions.dart';
 import 'models/account.dart';
+import 'dart:math';
+
+void testingNullSafety() {
+  Account? myAccount;
+  Account minhaConta = Account(name: "Marinho", balance: 470, isAuthenticated: true);
+
+  // Simulando uma comunicação externa
+  Random rng = Random();
+  if (rng.nextInt(10) % 2 == 0) {
+    myAccount = Account(name: "Fernando", balance: 270, isAuthenticated: true);
+    minhaConta.createdAt = DateTime.now();
+  }
+  print(myAccount.runtimeType);
+  print(myAccount != null ? myAccount.balance :  "Conta nula.");
+  print(myAccount?.name);
+  print(minhaConta.createdAt);
+  if (minhaConta.createdAt != null) {
+    print(minhaConta.createdAt!.day);
+  }
+}
 
 void main() {
+  testingNullSafety();
+
   // Criando o banco
   BankController bankController = BankController();
 
